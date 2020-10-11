@@ -41,3 +41,16 @@ a:hover {
     width: 30px;
     height: 30px;
 }
+
+@media screen and (max-width:768px) {
+    .page {
+        flex-direction: column;
+    }
+    .header {
+        width: 100%;
+    }
+    .page-content {
+        width: 100%;
+    }
+
+}
