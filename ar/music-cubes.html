@@ -39,6 +39,10 @@
 
 		var mesh1;
 
+		var audioCtx, source, analyser, dataArray;
+
+		var ball;
+
 		initialize();
 		animate();
 
@@ -128,8 +132,8 @@
 				navigator.mediaDevices.getUserMedia({ audio: true })
 					.then(function (stream) {
 
-						var audioCtx = new AudioContext();
-						var source = audioCtx.createMediaStreamSource(stream);
+						audioCtx = new AudioContext();
+						source = audioCtx.createMediaStreamSource(stream);
 					}
 					).catch(function (err) { console.log('The following gUM error occured' + err) });
 			}
@@ -137,12 +141,12 @@
 				console.log("getUserMedia not supported/blocked on your browser!");
 			}
 
-			var analyser = audioCtx.createAnalyser();
+			analyser = audioCtx.createAnalyser();
 			source.connect(analyser);
 			analyser.connect(audioCtx.destination);
 			analyser.fftSize = 512;
 			var bufferLength = analyser.frequencyBinCount;
-			var dataArray = new Uint8Array(bufferLength);
+			dataArray = new Uint8Array(bufferLength);
 
 
 			////////////////////////////////////////////////////////////
@@ -163,42 +167,31 @@
 			floorMesh.rotation.x = -Math.PI / 2;
 			sceneGroup.add(floorMesh);
 
-			var icosahedronGeometry = new THREE.IcosahedronGeometry(10, 4);
-			var lambertMaterial = new THREE.MeshLambertMaterial({
-				color: 0xff00ee,
-				wireframe: true
-			});
-
-			var ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(10, 4),
+				new THREE.MeshLambertMaterial({
+					color: 0xff00ee,
+					wireframe: true
+				}));
 			ball.position.set(0, 0, 0);
 			sceneGroup.add(ball);
-
-			var spotLight = new THREE.SpotLight(0xffffff);
-			spotLight.intensity = 0.9;
-			spotLight.position.set(-10, 40, 20);
-			spotLight.lookAt(ball);
-			spotLight.castShadow = true;
-			scene.add(spotLight);
-
-
-
-			cubeMeshArray = [];
-			let p = 1;
-			let cubePositions = [new THREE.Vector3(p, 1, 0), new THREE.Vector3(-p, 1, 0),
-			new THREE.Vector3(-p, 1, 0), new THREE.Vector3(p, 1, 0)];
-
-			for (let n = 0; n < 4; n++) {
-				let cubeMesh = new THREE.Mesh(
-					new THREE.CubeGeometry(0.5, 0.5, 0.5),
-					new THREE.MeshNormalMaterial({
-						color: 'blue',
-					})
-				);
-				cubeMesh.position.copy(cubePositions[n]);
-				sceneGroup.add(cubeMesh);
-				cubeMeshArray[n] = cubeMesh;
-			}
-
+			/*
+						cubeMeshArray = [];
+						let p = 1;
+						let cubePositions = [new THREE.Vector3(p, 1, 0), new THREE.Vector3(-p, 1, 0),
+						new THREE.Vector3(-p, 1, 0), new THREE.Vector3(p, 1, 0)];
+			
+						for (let n = 0; n < 4; n++) {
+							let cubeMesh = new THREE.Mesh(
+								new THREE.CubeGeometry(0.5, 0.5, 0.5),
+								new THREE.MeshNormalMaterial({
+									color: 'blue',
+								})
+							);
+							cubeMesh.position.copy(cubePositions[n]);
+							sceneGroup.add(cubeMesh);
+							cubeMeshArray[n] = cubeMesh;
+						}
+			*/
 		}
 
 
