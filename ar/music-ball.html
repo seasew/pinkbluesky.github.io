@@ -171,33 +171,33 @@
 			// setup audio
 			////////////////////////////////////////////////////////////
 
-
-			dataArray = [];
-			audioCtx = null;
-
-			// initialize Web Audio API
-			if (navigator.mediaDevices) {
-				console.log("getUserMedia supported.");
-				navigator.mediaDevices.getUserMedia({ audio: true })
-					.then(function (stream) {
-
-						audioCtx = new AudioContext();
-						source = audioCtx.createMediaStreamSource(stream);
-
-						console.log(audioCtx);
-						analyser = audioCtx.createAnalyser();
-						source.connect(analyser);
-						analyser.connect(audioCtx.destination);
-						analyser.fftSize = 2048;
-						var bufferLength = analyser.frequencyBinCount;
-						dataArray = new Uint8Array(bufferLength);
-					}
-					).catch(function (err) { console.log('The following gUM error occurred' + err) });
-			}
-			else {
-				console.log("getUserMedia not supported/blocked on your browser!");
-			}
-
+			/*
+						dataArray = [];
+						audioCtx = null;
+			
+						// initialize Web Audio API
+						if (navigator.mediaDevices) {
+							console.log("getUserMedia supported.");
+							navigator.mediaDevices.getUserMedia({ audio: true })
+								.then(function (stream) {
+			
+									audioCtx = new AudioContext();
+									source = audioCtx.createMediaStreamSource(stream);
+			
+									console.log(audioCtx);
+									analyser = audioCtx.createAnalyser();
+									source.connect(analyser);
+									analyser.connect(audioCtx.destination);
+									analyser.fftSize = 2048;
+									var bufferLength = analyser.frequencyBinCount;
+									dataArray = new Uint8Array(bufferLength);
+								}
+								).catch(function (err) { console.log('The following gUM error occurred' + err) });
+						}
+						else {
+							console.log("getUserMedia not supported/blocked on your browser!");
+						}
+			*/
 
 			////////////////////////////////////////////////////////////
 			// setup scene
