@@ -181,24 +181,24 @@
 			scene.add(spotLight);
 
 
-			/*
-						cubeMeshArray = [];
-						let p = 1;
-						let cubePositions = [new THREE.Vector3(p, 1, 0), new THREE.Vector3(-p, 1, 0),
-						new THREE.Vector3(-p, 1, 0), new THREE.Vector3(p, 1, 0)];
-			
-						for (let n = 0; n < 4; n++) {
-							let cubeMesh = new THREE.Mesh(
-								new THREE.CubeGeometry(0.5, 0.5, 0.5),
-								new THREE.MeshNormalMaterial({
-									color: 'blue',
-								})
-							);
-							cubeMesh.position.copy(cubePositions[n]);
-							sceneGroup.add(cubeMesh);
-							cubeMeshArray[n] = cubeMesh;
-						}
-			*/
+
+			cubeMeshArray = [];
+			let p = 1;
+			let cubePositions = [new THREE.Vector3(p, 1, 0), new THREE.Vector3(-p, 1, 0),
+			new THREE.Vector3(-p, 1, 0), new THREE.Vector3(p, 1, 0)];
+
+			for (let n = 0; n < 4; n++) {
+				let cubeMesh = new THREE.Mesh(
+					new THREE.CubeGeometry(0.5, 0.5, 0.5),
+					new THREE.MeshNormalMaterial({
+						color: 'blue',
+					})
+				);
+				cubeMesh.position.copy(cubePositions[n]);
+				sceneGroup.add(cubeMesh);
+				cubeMeshArray[n] = cubeMesh;
+			}
+
 		}
 
 
