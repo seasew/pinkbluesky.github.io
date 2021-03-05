@@ -256,7 +256,7 @@
 
 				var rf = 0.00001;
 				var distance = (offset + bassFr)
-					+ noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+					+ noise.noise3D(vertex.x + time * rf * 3, vertex.y + time * rf * 4, vertex.z + time * rf * 5) * amp * treFr;
 				vertex.multiplyScalar(distance);
 			});
 
