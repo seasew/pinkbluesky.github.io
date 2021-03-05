@@ -83,16 +83,19 @@
 
 		var noise; // simplexnoise instance
 
-
-		var file, audio, fileLabel;
-
 		initialize();
 		animate();
 
 		function play() {
+
+			console.log('ok');
+			var file = document.getElementById("thefile");
+			var audio = document.getElementById("audio");
+			var fileLabel = document.querySelector("label.file");
+
 			audioCtx = new AudioContext();
-			source = context.createMediaElementSource(audio);
-			analyser = context.createAnalyser();
+			source = audioCtx.createMediaElementSource(audio);
+			analyser = audioCtx.createAnalyser();
 			source.connect(analyser);
 			analyser.connect(audioCtx.destination);
 			analyser.fftSize = 512;
@@ -168,11 +171,6 @@
 		}
 
 		function initialize() {
-
-
-			file = document.getElementById("thefile");
-			audio = document.getElementById("audio");
-			fileLabel = document.querySelector("label.file");
 
 			scene = new THREE.Scene();
 
@@ -253,11 +251,15 @@
 				type: 'pattern', patternUrl: "data/hiro.patt",
 			})
 
-			document.onload = function (e) {
-				console.log(e);
-				audio.play();
-				play();
-			}
+
+
+			var file = document.getElementById("thefile");
+			var audio = document.getElementById("audio");
+			var fileLabel = document.querySelector("label.file");
+
+			//audio.play();
+			//play();
+
 			file.onchange = function () {
 				fileLabel.classList.add('normal');
 				audio.classList.add('active');
