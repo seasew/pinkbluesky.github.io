@@ -162,19 +162,19 @@
 
 			let sceneGroup = new THREE.Group();
 			markerRoot1.add(sceneGroup);
-
-			let floorGeometry = new THREE.PlaneGeometry(20, 20);
-			let floorMaterial = new THREE.MeshNormalMaterial({
-				transparent: true,
-				opacity: 0.5,
-				side: THREE.DoubleSide
-			});
-			floorMaterial.opacity = 0.3;
-			let floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
-			floorMesh.rotation.x = -Math.PI / 2;
-			sceneGroup.add(floorMesh);
-
-			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 4),
+			/*
+						let floorGeometry = new THREE.PlaneGeometry(20, 20);
+						let floorMaterial = new THREE.MeshNormalMaterial({
+							transparent: true,
+							opacity: 0.5,
+							side: THREE.DoubleSide
+						});
+						floorMaterial.opacity = 0.3;
+						let floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+						floorMesh.rotation.x = -Math.PI / 2;
+						sceneGroup.add(floorMesh);
+			*/
+			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 4),
 				new THREE.MeshLambertMaterial({
 					color: 0xff00ee,
 					wireframe: true
@@ -250,7 +250,7 @@
 		function makeRoughBall(mesh, bassFr, treFr) {
 			mesh.geometry.vertices.forEach(function (vertex, i) {
 				var offset = mesh.geometry.parameters.radius;
-				var amp = 7;
+				var amp = 3;
 				var time = window.performance.now();
 				vertex.normalize();
 
