@@ -149,23 +149,6 @@
 			ball.position.set(0, 0, 0);
 			sceneGroup.add(ball);
 
-			var planeGeometry = new THREE.PlaneGeometry(800, 800, 20, 20);
-			var planeMaterial = new THREE.MeshLambertMaterial({
-				color: 0x6904ce,
-				side: THREE.DoubleSide,
-				wireframe: true
-			});
-
-			var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-			plane.rotation.x = -0.5 * Math.PI;
-			plane.position.set(0, 30, 0);
-			sceneGroup.add(plane);
-
-			var plane2 = new THREE.Mesh(planeGeometry, planeMaterial);
-			plane2.rotation.x = -0.5 * Math.PI;
-			plane2.position.set(0, -30, 0);
-			sceneGroup.add(plane2);
-
 			sceneGroup.rotation.y += 0.005;
 
 		}
@@ -331,18 +314,6 @@
 			mesh.geometry.computeFaceNormals();
 		}
 
-		function makeRoughGround(mesh, distortionFr) {
-			mesh.geometry.vertices.forEach(function (vertex, i) {
-				var amp = 2;
-				var time = Date.now();
-				var distance = (noise.noise2D(vertex.x + time * 0.0003, vertex.y + time * 0.0001) + 0) * distortionFr * amp;
-				vertex.z = distance;
-			});
-			mesh.geometry.verticesNeedUpdate = true;
-			mesh.geometry.normalsNeedUpdate = true;
-			mesh.geometry.computeVertexNormals();
-			mesh.geometry.computeFaceNormals();
-		}
 
 		// helper functions: avg, min, max for audio visualization
 
