@@ -83,6 +83,9 @@
 
 		var noise; // simplexnoise instance
 
+
+		var file, audio, fileLabel;
+
 		initialize();
 		animate();
 
@@ -99,9 +102,9 @@
 
 		function initialize() {
 
-			var file = document.getElementById("thefile");
-			var audio = document.getElementById("audio");
-			var fileLabel = document.querySelector("label.file");
+			file = document.getElementById("thefile");
+			audio = document.getElementById("audio");
+			fileLabel = document.querySelector("label.file");
 
 			document.onload = function (e) {
 				console.log(e);
@@ -256,6 +259,10 @@
 
 
 		function update() {
+
+			file = document.getElementById("thefile");
+			audio = document.getElementById("audio");
+			fileLabel = document.querySelector("label.file");
 
 			file.onchange = function () {
 				fileLabel.classList.add('normal');
