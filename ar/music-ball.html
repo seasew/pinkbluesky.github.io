@@ -86,7 +86,7 @@
 			analyser = context.createAnalyser();
 			source.connect(analyser);
 			analyser.connect(audioCtx.destination);
-			analyser.fftSize = 2048;
+			analyser.fftSize = 512;
 			var bufferLength = analyser.frequencyBinCount;
 			dataArray = new Uint8Array(bufferLength);
 		}
