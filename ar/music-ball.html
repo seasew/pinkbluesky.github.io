@@ -145,7 +145,7 @@
 						analyser = audioCtx.createAnalyser();
 						source.connect(analyser);
 						analyser.connect(audioCtx.destination);
-						analyser.fftSize = 64;
+						analyser.fftSize = 2048;
 						var bufferLength = analyser.frequencyBinCount;
 						dataArray = new Uint8Array(bufferLength);
 					}
@@ -252,7 +252,7 @@
 		function makeRoughBall(mesh, bassFr, treFr) {
 			mesh.geometry.vertices.forEach(function (vertex, i) {
 				var offset = mesh.geometry.parameters.radius;
-				var amp = 3;
+				var amp = 7;
 				var time = window.performance.now();
 				vertex.normalize();
 
