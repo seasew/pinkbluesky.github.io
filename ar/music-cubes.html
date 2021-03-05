@@ -174,7 +174,7 @@
 						floorMesh.rotation.x = -Math.PI / 2;
 						sceneGroup.add(floorMesh);
 			*/
-			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 4),
+			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 2),
 				new THREE.MeshLambertMaterial({
 					color: 0xff00ee,
 					wireframe: true
@@ -220,8 +220,8 @@
 				var upperAvgFr = avg(upperHalf) / upperHalf.length;
 
 				makeRoughBall(ball,
-					modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8),
-					modulate(upperAvgFr, 0, 1, 0, 4));
+					modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 5),
+					modulate(upperAvgFr, 0, 1, 0, 2));
 
 			}
 			/*
