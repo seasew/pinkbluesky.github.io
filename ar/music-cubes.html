@@ -137,7 +137,7 @@
 				console.log("getUserMedia not supported/blocked on your browser!");
 			}
 
-			var analyser = context.createAnalyser();
+			var analyser = audioCtx.createAnalyser();
 			source.connect(analyser);
 			analyser.connect(audioCtx.destination);
 			analyser.fftSize = 512;
@@ -172,8 +172,6 @@
 			var ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
 			ball.position.set(0, 0, 0);
 			sceneGroup.add(ball);
-
-			scene.add(sceneGroup);
 
 			var spotLight = new THREE.SpotLight(0xffffff);
 			spotLight.intensity = 0.9;
