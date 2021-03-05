@@ -19,6 +19,7 @@
 		html,
 		body {
 			font-family: 'Saira', sans-serif;
+			font-size: small;
 		}
 
 		canvas {
@@ -233,7 +234,7 @@
 			let sceneGroup = new THREE.Group();
 			markerRoot1.add(sceneGroup);
 
-			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(10, 4),
+			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 4),
 				new THREE.MeshLambertMaterial({
 					color: 0xff00ee,
 					wireframe: true
@@ -241,7 +242,7 @@
 			ball.position.set(0, 0, 0);
 			sceneGroup.add(ball);
 
-			sceneGroup.rotation.y += 0.005;
+			//sceneGroup.rotation.y += 0.005;
 
 		}
 
