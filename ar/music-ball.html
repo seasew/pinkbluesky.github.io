@@ -15,19 +15,32 @@
 	<script src="threex/threex-artoolkitcontext.js"></script>
 	<script src="threex/threex-arbasecontrols.js"></script>
 	<script src="threex/threex-armarkercontrols.js"></script>
-</head>
-
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-
 	<style>
+		html,
+		body {
+			font-family: 'Saira', sans-serif;
+		}
+
 		canvas {
-			margin-top: 100px;
+			margin-top: 100px !important;
 		}
 
 		video {
-			margin-top: 100px;
+			margin-top: 100px !important;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin-top: 10px;
 		}
 	</style>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+
 	<!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
@@ -40,7 +53,7 @@
 -->
 
 
-	<div>
+	<div class="content">
 		<label for="thefile" class="file"> Choose an audio file
 			<input type="file" id="thefile" accept="audio/*" />
 		</label><audio id="audio" controls></audio>
@@ -252,7 +265,6 @@
 			}
 
 		}
-
 
 		function render() {
 			renderer.render(scene, camera);
