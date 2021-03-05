@@ -108,17 +108,6 @@
 				audio.play();
 				play();
 			}
-			file.onchange = function () {
-				fileLabel.classList.add('normal');
-				audio.classList.add('active');
-				var files = this.files;
-
-				audio.src = URL.createObjectURL(files[0]);
-				audio.load();
-				audio.play();
-				play();
-			}
-
 
 			scene = new THREE.Scene();
 			noise = new SimplexNoise();
@@ -267,6 +256,18 @@
 
 
 		function update() {
+
+			file.onchange = function () {
+				fileLabel.classList.add('normal');
+				audio.classList.add('active');
+				var files = this.files;
+
+				audio.src = URL.createObjectURL(files[0]);
+				audio.load();
+				audio.play();
+				play();
+			}
+
 			// update artoolkit on every frame
 			if (arToolkitSource.ready !== false)
 				arToolkitContext.update(arToolkitSource.domElement);
