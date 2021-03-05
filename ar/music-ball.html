@@ -31,10 +31,14 @@
 
 		.content {
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 			margin-top: 10px;
+		}
+
+		input#thefile {
+			margin: 0px 8px 3px;
 		}
 	</style>
 </head>
@@ -56,7 +60,8 @@
 	<div class="content">
 		<label for="thefile" class="file"> Choose an audio file
 			<input type="file" id="thefile" accept="audio/*" />
-		</label><audio id="audio" controls></audio>
+		</label>
+		<audio id="audio" controls></audio>
 		<div id="out"></div>
 
 	</div>
@@ -228,7 +233,7 @@
 			let sceneGroup = new THREE.Group();
 			markerRoot1.add(sceneGroup);
 
-			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(2, 4),
+			ball = new THREE.Mesh(new THREE.IcosahedronGeometry(10, 4),
 				new THREE.MeshLambertMaterial({
 					color: 0xff00ee,
 					wireframe: true
