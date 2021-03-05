@@ -43,11 +43,14 @@
 
 		var ball;
 
+		var noise; // simplexnoise instance
+
 		initialize();
 		animate();
 
 		function initialize() {
 			scene = new THREE.Scene();
+			noise = new SimplexNoise();
 
 			let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
 			scene.add(ambientLight);
@@ -126,6 +129,9 @@
 			////////////////////////////////////////////////////////////
 
 
+			dataArray = [];
+			audioCtx = null;
+
 			// initialize Web Audio API
 			if (navigator.mediaDevices) {
 				console.log("getUserMedia supported.");
@@ -134,19 +140,20 @@
 
 						audioCtx = new AudioContext();
 						source = audioCtx.createMediaStreamSource(stream);
+
+						console.log(audioCtx);
+						analyser = audioCtx.createAnalyser();
+						source.connect(analyser);
+						analyser.connect(audioCtx.destination);
+						analyser.fftSize = 512;
+						var bufferLength = analyser.frequencyBinCount;
+						dataArray = new Uint8Array(bufferLength);
 					}
-					).catch(function (err) { console.log('The following gUM error occured' + err) });
+					).catch(function (err) { console.log('The following gUM error occurred' + err) });
 			}
 			else {
 				console.log("getUserMedia not supported/blocked on your browser!");
 			}
-
-			analyser = audioCtx.createAnalyser();
-			source.connect(analyser);
-			analyser.connect(audioCtx.destination);
-			analyser.fftSize = 512;
-			var bufferLength = analyser.frequencyBinCount;
-			dataArray = new Uint8Array(bufferLength);
 
 
 			////////////////////////////////////////////////////////////
@@ -201,20 +208,22 @@
 				arToolkitContext.update(arToolkitSource.domElement);
 
 
-			analyser.getByteFrequencyData(dataArray);
-			var lowerHalf = dataArray.slice(0, (dataArray.length / 2) - 1);
-			var upperHalf = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
+			if (dataArray && analyser) {
+				analyser.getByteFrequencyData(dataArray);
+				var lowerHalf = dataArray.slice(0, (dataArray.length / 2) - 1);
+				var upperHalf = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
 
-			var overallAvg = avg(dataArray);
-			var lowerMaxFr = max(lowerHalf) / lowerHalf.length;
-			var lowerAvgFr = avg(lowerHalf) / lowerHalf.length;
-			var upperMaxFr = max(upperHalf) / upperHalf.length;
-			var upperAvgFr = avg(upperHalf) / upperHalf.length;
+				var overallAvg = avg(dataArray);
+				var lowerMaxFr = max(lowerHalf) / lowerHalf.length;
+				var lowerAvgFr = avg(lowerHalf) / lowerHalf.length;
+				var upperMaxFr = max(upperHalf) / upperHalf.length;
+				var upperAvgFr = avg(upperHalf) / upperHalf.length;
 
-			makeRoughBall(ball,
-				modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8),
-				modulate(upperAvgFr, 0, 1, 0, 4));
+				makeRoughBall(ball,
+					modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8),
+					modulate(upperAvgFr, 0, 1, 0, 4));
 
+			}
 			/*
 		// detect sound and update cube positions
 		cubeMeshArray[0].position.y = 1.2 * (Math.abs(Math.sin(2.00 * totalTime + 0.10)) + 0.5);
